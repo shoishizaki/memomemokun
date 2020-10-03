@@ -29,6 +29,11 @@
     </nav>
   </header>
   <main>
+    <div class="flash">
+      <% flash.each do |message_type, message| %>
+      <%= message %>
+      <% end %>
+    </div>
     <%= yield %>
   </main>
   <footer class="page-footer">
