@@ -1,0 +1,16 @@
+<script type="text/javascript">
+  <% flash.each do |message_type, message| %>
+    <% if message_type == "success" %>
+      toastr.success("<%= message %>")
+    <% end %>
+    <% if message_type == "info" %>
+      toastr.info("<%= message %>")
+    <% end %>
+    <% if message_type == "warning" %>
+      toastr.warning("<%= message %>")
+    <% end %>
+    <% if message_type == "error" %>
+      toastr.error("<%= message %>")
+    <% end %>
+  <% end %>
+</script>

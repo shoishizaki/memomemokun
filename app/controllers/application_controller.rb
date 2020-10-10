@@ -3,14 +3,14 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user
     unless login?
-      flash[:notice] = "ログインが必要です。"
+      flash[:warning] = "ログインが必要です。"
       redirect_to "/login"
     end
   end
 
   def no_authenticate_user
     if login?
-      flash[:notice] = "すでにログインしています。"
+      flash[:warning] = "すでにログインしています。"
       redirect_to "/"
     end
   end
