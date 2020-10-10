@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :no_authenticate_user, {only: [:new, :create]}
 
   def index
     @users = User.all

@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :no_authenticate_user, {only: [:new, :create]}
+
   class PasswordMismatchError < StandardError; end
 
   def new
