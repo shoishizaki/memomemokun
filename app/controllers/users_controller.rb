@@ -11,11 +11,12 @@ class UsersController < ApplicationController
   def create
     begin
       @user = User.create!(user_params)
+      login(@user)
       flash[:notice] = "ユーザー登録が完了しました。"
-      redirect_to "/", status: 200
+      redirect_to "/"
     rescue
       flash[:danger] = "ユーザーの登録に失敗しました。"
-      redirect_to "/signup", status: 500
+      redirect_to "/signup"
     end
   end
 
