@@ -56,4 +56,14 @@ class UserTest < ActiveSupport::TestCase
     @user.password = "a" * 7
     assert_not(@user.valid?)
   end
+
+  # 概要: ユーザーが削除された時、メモも削除されることをを確認
+  # 期待値: メモが削除されている
+  test "should delete memo when user is deleted" do
+    @user.save
+    Memo.create(category: "テストカテゴリー", content: "テスト内容", user_id: @user.id)
+    assert_equal(1, Memo.all.count)
+    @user.destroy
+    assert_equal(0, Memo.all.count)
+  end
 end
