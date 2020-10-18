@@ -18,6 +18,18 @@ class MemosController < ApplicationController
     end
   end
 
+  def destroy
+    begin
+      @memo = Memo.find(params[:id])
+      @memo.destroy!
+      flash[:success] = "メモを削除しました。"
+      redirect_to "/memo"
+    rescue
+      flash[:error] = "原因不明のエラーが発生しました。"
+      redirect_to "/memo"
+    end
+  end
+
   private
 
   def memo_params

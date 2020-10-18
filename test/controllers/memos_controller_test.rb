@@ -54,4 +54,26 @@ class MemosControllerTest < ActionDispatch::IntegrationTest
 
     assert_equal(0, Memo.all.count)
   end
+
+  # 概要: メモを削除できることを確認
+  # 期待値: メモが削除されていることを確認
+  test "should delete memo" do
+    # メモはログイン状態でしかアクセスできないのでログインする
+    login
+    assert_equal(0, Memo.all.count)
+    params = {
+      memo: {
+        category: "テストカテゴリー",
+        content: "test",
+        user_id: User.first.id
+      }
+    }
+    post memos_url, params: params
+
+    assert_equal(1, Memo.all.count)
+
+    memo_id = Memo.first.id
+    delete memos_url, params: {id: memo_id}
+    assert_equal(0, Memo.all.count)
+  end
 end
