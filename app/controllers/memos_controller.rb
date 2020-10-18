@@ -4,6 +4,7 @@ class MemosController < ApplicationController
   def index
     @user = current_user
     @index = Memo.where(user_id: @user.id)
+    @memo_exist = @index.present?
     @memo = Memo.new
   end
 
