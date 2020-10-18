@@ -11,4 +11,8 @@ Rails.application.routes.draw do
   get "/user_index", to: "users#index"
   get "/signup", to: "users#new"
   post "/users", to: "users#create"
+
+  # memo
+  get "/memo", to: "memos#index"
+  post "/memos", to: "memos#create"
 end
