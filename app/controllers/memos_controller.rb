@@ -19,6 +19,22 @@ class MemosController < ApplicationController
     end
   end
 
+  def edit
+    @memo = Memo.find_by(id: params[:id])
+  end
+
+  def update
+    begin
+      @memo = Memo.find_by(id: params[:memo][:id])
+      @memo.update!(memo_params)
+      flash[:success] = "メモの編集が完了しました。"
+      redirect_to "/memo"
+    rescue
+      flash[:warning] = "メモのカテゴリーを入力してください。"
+      redirect_to memo_edit_path(id: params[:memo][:id])
+    end
+  end
+
   def destroy
     begin
       @memo = Memo.find(params[:id])

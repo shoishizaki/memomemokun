@@ -76,4 +76,62 @@ class MemosControllerTest < ActionDispatch::IntegrationTest
     delete memos_url, params: {id: memo_id}
     assert_equal(0, Memo.all.count)
   end
+
+  # 概要: メモが更新できることを確認
+  # 期待値: メモが更新されている
+  test "should update memo" do
+    # メモはログイン状態でしかアクセスできないのでログインする
+    login
+    assert_equal(0, Memo.all.count)
+    params = {
+      memo: {
+        category: "テストカテゴリー",
+        content: "test",
+        user_id: User.first.id
+      }
+    }
+    post memos_url, params: params
+
+    assert_equal(1, Memo.all.count)
+    assert_equal("テストカテゴリー", Memo.first.category)
+    assert_equal("test", Memo.first.content)
+
+    params[:memo][:category] = "編集カテゴリー"
+    params[:memo][:content] = "編集編集"
+    params[:memo][:id] = Memo.first.id
+
+    patch memo_url, params: params
+    assert_equal(1, Memo.all.count)
+    assert_equal("編集カテゴリー", Memo.first.category)
+    assert_equal("編集編集", Memo.first.content)
+  end
+
+  # 概要: カテゴリーが入っていない時メモが更新されないことを確認
+  # 期待値: メモが更新されていない
+  test "should not update memo" do
+    # メモはログイン状態でしかアクセスできないのでログインする
+    login
+    assert_equal(0, Memo.all.count)
+    params = {
+      memo: {
+        category: "テストカテゴリー",
+        content: "test",
+        user_id: User.first.id
+      }
+    }
+    post memos_url, params: params
+
+    assert_equal(1, Memo.all.count)
+    assert_equal("テストカテゴリー", Memo.first.category)
+    assert_equal("test", Memo.first.content)
+
+    params[:memo][:category] = ""
+    params[:memo][:content] = "編集編集"
+    params[:memo][:id] = Memo.first.id
+
+    patch memo_url, params: params
+    assert_equal(1, Memo.all.count)
+    assert_equal("テストカテゴリー", Memo.first.category)
+    assert_equal("test", Memo.first.content)
+  end
 end

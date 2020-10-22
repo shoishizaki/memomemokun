@@ -1,7 +1,15 @@
 // Place all the styles related to the Memos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-// .memo-container{
-//   display: flex;
-//   justify-content: center;
-// }
+.go-to-memo-list {
+  margin-top: 20px;
+  margin-right: 40px;
+  margin-left: 40px;
+  margin-bottom: 20px;
+}
+
+.memo-edit-title {
+  margin-right: 40px;
+  margin-left: 40px;
+  margin-bottom: 20px;
+}

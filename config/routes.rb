@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   # memo
   get "/memo", to: "memos#index"
+  get "/memo_edit", to: "memos#edit"
   post "/memos", to: "memos#create"
+  patch "/memo", to: "memos#update"
   delete "/memos", to: "memos#destroy"
 end

@@ -1,0 +1,19 @@
+<div class="go-to-memo-list">
+  <a href="/memo" class="waves-effect waves-light btn">メモ一覧へ</a>
+</div>
+<div class="memo-edit-title">
+  <h5>メモ編集</h5>
+</div>
+<div class="divider"></div>
+<%= form_with(model: @memo, class: "col s12") do |form| %>
+  <input type="hidden" id="memo_id" name="memo[id]" value="<%= @memo.id %>" />
+  <div class="input-field col s12">
+    <input id="category" type="text" name="memo[category]" class="validate" value="<%= @memo.category %>">
+    <label for="category">カテゴリー</label>
+  </div>
+  <div class="input-field col s12">
+    <textarea id="content" name="memo[content]" class="materialize-textarea"><%= @memo.content %></textarea>
+    <label for="content">内容</label>
+  </div>
+  <button class="btn waves-effect waves-light" action="/memo" method="post">編集</button>
+<% end %>
