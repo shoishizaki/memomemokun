@@ -13,4 +13,16 @@ class ActiveSupport::TestCase
   def is_login?
     !session[:user_id].nil?
   end
+
+  def login
+    # ユーザーを1名作成して、ログイン状態にする
+    params = {
+      user: {
+        email: "testtest@gmail.com",
+        password: "testtest"
+      }
+    }
+
+    post users_url, params: params
+  end
 end

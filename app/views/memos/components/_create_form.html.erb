@@ -1,0 +1,16 @@
+<div class="col s4">
+  <h5>新規作成</h5>
+  <div class="divider"></div>
+  <%= form_with(model: @memo, class: "col s12") do |form| %>
+    <input type="hidden" id="signup_pass_confirm" name="memo[user_id]" value="<%= @user.id %>" />
+    <div class="input-field col s12">
+      <input id="category" type="text" name="memo[category]" class="validate">
+      <label for="category">カテゴリー</label>
+    </div>
+    <div class="input-field col s12">
+      <textarea id="content" name="memo[content]" class="materialize-textarea"></textarea>
+      <label for="content">内容</label>
+    </div>
+    <button class="btn waves-effect waves-light" action="/memos/create" method="post">作成</button>
+  <% end %>
+</div>
